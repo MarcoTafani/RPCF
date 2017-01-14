@@ -21,13 +21,28 @@
 			h1>a {
 				color: #CC6F6F;
 			}
+			input[type=range][orient=vertical]
+			{
+				writing-mode: bt-lr; /* IE */
+				-webkit-appearance: slider-vertical; /* WebKit */
+				width: 8px;
+				height: 175px;
+				padding: 0 5px;
+			}
 		</style>
+		<script>
+			function RPCFUpdate() {
+				document.getElementById("RPCFform").submit();
+			}
+		</script>
 	</head>
 	<body>
 		<h1>RPCF</h1>
-		 <form action="#" method="get">
-			 motorDrive: <input type="text" name="motorDrive" value="{{ motorDrive }}"><br>
-			 servoStyr: <input type="text" name="servoStyr" value="{{ servoStyr }}"><br>
+		<p>Gas: {{ motorDrive }}</p> 
+		<p>Steer: {{ servoStyr }}</p> 
+		<form id="RPCFform" action="#" method="get">
+			<input id="motorDrive" name="motorDrive" type="range" min="-1" max="1" step="1" orient="vertical" value="{{ motorDrive }}" onchange="RPCFUpdate()" /> <br />
+			<input id="servoStyr" name="servoStyr" type="range" min="-100" max="100" step="1" value="{{ servoStyr }}" onchange="RPCFUpdate()" /> <br />
 			<input type="submit" value="Submit">
 		</form> 
 	</body>
